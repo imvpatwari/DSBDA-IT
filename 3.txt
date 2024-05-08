@@ -1,0 +1,70 @@
+import pandas as pd 
+import numpy as np 
+import seaborn as sn 
+import random as rn 
+import matplotlib.pyplot as mat #used to create 2D graphs and plots by using python scripts
+from sklearn.model_selection import train_test_split 
+from sklearn.naive_bayes import GaussianNB,MultinomialNB
+from sklearn.metrics import accuracy_score 
+
+DataFrame1=pd.read_csv('heart.csv') 
+DataFrame1
+
+DataFrame2=pd.read_csv('AirQuality.csv',sep=';') 
+DataFrame2
+
+DataFrame1.isna().sum().sum()
+
+DataFrame1.dtypes
+
+DataFrame2.dtypes
+
+DATA TRANSFORMATION
+
+DataFrame1.loc[DataFrame1['sex']==1,'sex']='M'
+
+DataFrame1.loc[DataFrame1['sex']==0,'sex']='F'
+
+DataFrame1.head()
+
+from sklearn.preprocessing import LabelEncoder
+labelencoder=LabelEncoder()
+DataFrame1["sex"]=labelencoder.fit_transform(DataFrame1["sex"])
+DataFrame1
+
+ERROR CORRECTION
+
+DataFrame1[DataFrame1['ca']==4]
+
+DataFrame1.loc[DataFrame1['ca']==4,'ca']=np.NaN
+
+DataFrame1 = DataFrame1.fillna(DataFrame1.median())
+
+DataFrame1.isnull().sum()
+
+DataFrame1
+
+MODEL BUILDING
+
+X_train, X_test, y_train, y_test = train_test_split(DataFrame1.iloc[:,:-1], DataFrame1.iloc[:,-1], test_size = 0.3, random_state = 0)
+
+X_train.shape, X_test.shape,y_train.shape
+
+gnb = GaussianNB()
+
+gnb.fit(X_train, y_train)
+
+y_pred = gnb.predict(X_test)
+y_pred
+
+print('Model accuracy score: {0:0.4f}'. format(accuracy_score(y_test, y_pred)))
+
+DATA VISUALIZATION
+
+dataplot = sn.heatmap(DataFrame4.corr(), cmap="Blues", annot=True)
+mat.figure(figsize=(20,15))
+mat.show()
+
+
+
+

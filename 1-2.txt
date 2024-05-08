@@ -1,0 +1,40 @@
+import pandas as pd
+import numpy as np
+
+df= pd.read_csv('dataset_Facebook.csv',sep=';')
+df
+
+df.describe()
+
+df.shape
+
+df1 = df[['Page total likes','Category','Post Month','Post Weekday']].loc[0:15]
+df1
+
+df2 = df[['Page total likes','Category','Post Month','Post Weekday']].loc[16:30]
+df2
+
+df3 = df[['Page total likes','Category','Post Month','Post Weekday']].loc[31:60]
+df3
+
+merge= pd.concat([df1,df2,df3])
+merge
+
+sorted = df.sort_values('Page total likes',ascending = False)
+sorted
+
+sorted = df.sort_values('Page total likes',ascending = True)
+sorted
+
+trans = df.transpose()
+trans
+
+pivotetable = pd.pivot_table(df,index=['Type','Paid'],values='like')
+pivotetable
+
+stacked = df.stack()
+stacked.loc[0:15]
+
+
+
+
