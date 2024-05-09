@@ -27,6 +27,9 @@ DataFrame3.isna().sum().sum()
 
 DataFrame4=DataFrame3.dropna()
 
+DataFrame4.replace(to_replace=',',value='.',regex=True,inplace=True)
+DataFrame4
+
 DataFrame4.drop_duplicates(inplace=True)
 DataFrame4
 
